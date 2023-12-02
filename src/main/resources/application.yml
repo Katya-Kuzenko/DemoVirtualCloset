@@ -4,3 +4,9 @@ server:
 spring:
   thymeleaf:
     cache: false
+
+#Replace Spring Security default username and password
+  security:
+    user:
+      name: user1
+      password: demo
