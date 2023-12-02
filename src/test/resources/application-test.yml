@@ -1,0 +1,8 @@
+database:
+  files:
+    path:
+      root: ${java.io.tmpdir}demo-virtual-closet
+      users: ${database.files.path.root}/users
+      categories: ${database.files.path.root}/categories
+      closet: ${database.files.path.root}/closet
+      outfit: ${database.files.path.root}/outfit
