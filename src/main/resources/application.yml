@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  thymeleaf:
+    cache: false
+
+database:
+  files:
+    path:
+      root: D:\demo-virtual-closet
+      users: ${database.files.path.root}/users
+      categories: ${database.files.path.root}/categories
+      closet: ${database.files.path.root}/closet
+      outfit: ${database.files.path.root}/outfit
