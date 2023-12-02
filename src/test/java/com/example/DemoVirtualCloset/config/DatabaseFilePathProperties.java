@@ -29,4 +29,8 @@ public class DatabaseFilePathProperties {
     public String getClosetPath() {
         return path.get("closet");
     }
+
+    public String getOutfitPath() {
+        return path.get("outfit");
+    }
 }
