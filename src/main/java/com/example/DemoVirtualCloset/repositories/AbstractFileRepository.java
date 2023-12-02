@@ -1,9 +1,11 @@
 package com.example.DemoVirtualCloset.repositories;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public abstract class AbstractFileRepository<ID, T> implements FileRepository<ID, T> {
 
@@ -23,9 +25,17 @@ public abstract class AbstractFileRepository<ID, T> implements FileRepository<ID
         }
     }
 
-    protected void writeValue(File file, T user) {
+    protected void writeValue(File file, T entity) {
         try {
-            objectMapper.writeValue(file, user);
+            objectMapper.writeValue(file, entity);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected void writeAllValues(File file, List<T> entities) {
+        try {
+            objectMapper.writeValue(file, entities);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -34,6 +44,18 @@ public abstract class AbstractFileRepository<ID, T> implements FileRepository<ID
     protected T readValue(File file, Class<T> type) {
         try {
             return objectMapper.readValue(file, type);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected List<T> readAllValues(File file) {
+        try {
+            if (!file.exists()) {
+                return List.of();
+            }
+            return objectMapper.readValue(file, new TypeReference<>() {
+            });
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

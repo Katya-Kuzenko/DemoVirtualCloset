@@ -1,7 +1,7 @@
 package com.example.DemoVirtualCloset.repositories;
 
 import com.example.DemoVirtualCloset.domain.User;
-import com.example.DemoVirtualCloset.exceptions.UserExistException;
+import com.example.DemoVirtualCloset.exceptions.EntityExistException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -25,7 +25,7 @@ public class UserRepositoryImpl extends AbstractFileRepository<UUID, User> imple
         File file = getUserFile(entity);
         boolean created = createFile(file);
         if (!created) {
-            throw new UserExistException("User exist with name " + entity.getName());
+            throw new EntityExistException("User exist with name " + entity.getName());
         }
         writeValue(file, entity);
         return entity;
