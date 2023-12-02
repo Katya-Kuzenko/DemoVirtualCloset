@@ -64,7 +64,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void findByIdNotExistTest() throws IOException {
+    void findByIdNotExistTest() {
         Optional<User> result = userRepository.findById(UUID.randomUUID());
         assertFalse(result.isPresent());
     }

@@ -57,7 +57,6 @@ public class CategoryRepositoryTest {
         File file = getCategoryFile();
         assertTrue(file.exists());
 
-        objectMapper.readerForListOf(Category.class).readValue(file);
         List<Category> categories = objectMapper.readerForListOf(Category.class).readValue(file);
         Optional<Category> savedCategoryOpt = categories.stream().findFirst();
         assertTrue(savedCategoryOpt.isPresent());

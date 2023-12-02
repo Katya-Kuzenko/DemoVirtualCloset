@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 public abstract class AbstractFileRepository<ID, T> implements FileRepository<ID, T> {
@@ -18,6 +19,9 @@ public abstract class AbstractFileRepository<ID, T> implements FileRepository<ID
 
     protected boolean createFile(File file) {
         try {
+            if (!file.isDirectory()) {
+                Files.createDirectories(file.getParentFile().toPath());
+            }
             return file.createNewFile();
         } catch (IOException e) {
             throw new RuntimeException(e);

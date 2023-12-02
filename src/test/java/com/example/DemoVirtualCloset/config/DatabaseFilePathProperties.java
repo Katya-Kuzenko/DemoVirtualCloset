@@ -25,4 +25,8 @@ public class DatabaseFilePathProperties {
     public String getCategoriesPath() {
         return path.get("categories");
     }
+
+    public String getClosetPath() {
+        return path.get("closet");
+    }
 }
