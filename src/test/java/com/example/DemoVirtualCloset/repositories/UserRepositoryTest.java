@@ -2,6 +2,7 @@ package com.example.DemoVirtualCloset.repositories;
 
 
 import com.example.DemoVirtualCloset.config.DatabaseFilePathProperties;
+import com.example.DemoVirtualCloset.domain.Category;
 import com.example.DemoVirtualCloset.domain.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -59,6 +61,12 @@ public class UserRepositoryTest {
         assertEquals(user.getUuid(), savedUser.getUuid());
         assertEquals(user.getName(), savedUser.getName());
         assertEquals(user.getPassword(), savedUser.getPassword());
+    }
+
+    @Test
+    void findByIdNotExistTest() throws IOException {
+        Optional<User> result = userRepository.findById(UUID.randomUUID());
+        assertFalse(result.isPresent());
     }
 
     @Test

@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CategoryRepository extends FileRepository<UUID, Category> {
-    List<Category> getAll();
+    List<Category> findAll();
 }

@@ -3,12 +3,13 @@ package com.example.DemoVirtualCloset.repositories;
 import com.example.DemoVirtualCloset.domain.Category;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
-
+import org.springframework.stereotype.Repository;
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public class CategoryRepositoryImpl extends AbstractFileRepository<UUID, Category> implements CategoryRepository {
     public static final String CATEGORY_FILE_NAME = "categories.json";
     private final String categoryFilesPath;
@@ -23,16 +24,18 @@ public class CategoryRepositoryImpl extends AbstractFileRepository<UUID, Categor
         File file = getCategoryFile();
         if (!file.exists()) {
             createFile(file);
+            writeAllValues(file, List.of(entity));
+        } else {
+            List<Category> categories = readAllValues(file, Category.class);
+            categories.add(entity);
+            writeAllValues(file, categories);
         }
-        List<Category> categories = readAllValues(file);
-        categories.add(entity);
-        writeAllValues(file, categories);
         return entity;
     }
 
     @Override
     public Optional<Category> findById(UUID uuid) {
-        return getAll()
+        return findAll()
                 .stream()
                 .filter(el -> el.getUuid().equals(uuid))
                 .findFirst();
@@ -42,15 +45,15 @@ public class CategoryRepositoryImpl extends AbstractFileRepository<UUID, Categor
     public void deleteById(UUID uuid) {
         File file = getCategoryFile();
         if (file.exists()) {
-            List<Category> categories = readAllValues(file);
+            List<Category> categories = readAllValues(file, Category.class);
             categories.removeIf(el -> el.getUuid().equals(uuid));
             writeAllValues(file, categories);
         }
     }
 
     @Override
-    public List<Category> getAll() {
-        return readAllValues(getCategoryFile());
+    public List<Category> findAll() {
+        return readAllValues(getCategoryFile(), Category.class);
     }
 
     private File getCategoryFile() {

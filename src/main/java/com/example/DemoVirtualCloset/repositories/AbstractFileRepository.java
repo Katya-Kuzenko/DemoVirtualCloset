@@ -1,6 +1,5 @@
 package com.example.DemoVirtualCloset.repositories;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -49,13 +48,12 @@ public abstract class AbstractFileRepository<ID, T> implements FileRepository<ID
         }
     }
 
-    protected List<T> readAllValues(File file) {
+    protected List<T> readAllValues(File file, Class<T> type) {
         try {
             if (!file.exists()) {
                 return List.of();
             }
-            return objectMapper.readValue(file, new TypeReference<>() {
-            });
+            return objectMapper.readerForListOf(type).readValue(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -3,8 +3,11 @@ package com.example.DemoVirtualCloset.domain;
 import java.util.UUID;
 
 public class Category {
-    private final UUID uuid;
-    private final String name;
+    private UUID uuid;
+    private String name;
+
+    public Category() {
+    }
 
     public Category(String name) {
         this.name = name;

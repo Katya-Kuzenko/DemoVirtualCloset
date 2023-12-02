@@ -21,4 +21,8 @@ public class DatabaseFilePathProperties {
     public String getUsersPath() {
         return path.get("users");
     }
+
+    public String getCategoriesPath() {
+        return path.get("categories");
+    }
 }
