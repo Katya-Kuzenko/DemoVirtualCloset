@@ -32,8 +32,8 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User save(User entity) {
         File file = getUserFile(entity);
-        boolean exist = createFile(file);
-        if (exist) {
+        boolean created = createFile(file);
+        if (!created) {
             throw new UserExistException("User exist with name " + entity.getName());
         }
         writeValue(file, entity);
@@ -85,18 +85,8 @@ public class UserRepositoryImpl implements UserRepository {
         findById(uuid).ifPresent(user -> getUserFile(user).delete());
     }
 
-    @Override
-    public void deleteAll() {
-        File usersDirectory = new File(userFilesPath);
-        File[] userFiles = usersDirectory.listFiles();
-        if (userFiles != null) {
-            for (File userFile : userFiles) {
-                userFile.delete();
-            }
-        }
-    }
 
     private File getUserFile(User entity) {
-        return new File(String.join(userFilesPath, entity.getName(), File.pathSeparator) + JSON_EXTENSION);
+        return new File(String.join(File.separator, userFilesPath, entity.getName()) + JSON_EXTENSION);
     }
 }

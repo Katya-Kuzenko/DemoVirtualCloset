@@ -3,10 +3,12 @@ package com.example.DemoVirtualCloset.domain;
 import java.util.UUID;
 
 public class User {
-    private final UUID uuid;
-    private final String name;
-    private final String password;
+    private UUID uuid;
+    private String name;
+    private String password;
 
+    public User() {
+    }
     public User(String name, String password) {
         this.name = name;
         this.password = password;
