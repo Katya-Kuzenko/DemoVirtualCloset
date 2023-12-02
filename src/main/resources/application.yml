@@ -8,7 +8,7 @@ spring:
 database:
   files:
     path:
-      root: C:\Users\user\Desktop\demo-virtual-closet
+      root: D:\demo-virtual-closet
       users: ${database.files.path.root}\users
       categories: ${database.files.path.root}\categories
       closet: ${database.files.path.root}\closet
