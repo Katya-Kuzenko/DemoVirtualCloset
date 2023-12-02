@@ -15,9 +15,9 @@ public class ClosingItemRepositoryImpl extends AbstractFileRepository<UUID, Clos
     public static final String CLOSING_ITEMS_FILE_NAME = "closing-items.json";
     private final String closetFilesPath;
 
-    public ClosingItemRepositoryImpl(ObjectMapper objectMapper, @Value("${database.files.path.closet}") String userFilesPath) {
+    public ClosingItemRepositoryImpl(ObjectMapper objectMapper, @Value("${database.files.path.closet}") String closetFilesPath) {
         super(objectMapper);
-        this.closetFilesPath = userFilesPath;
+        this.closetFilesPath = closetFilesPath;
     }
 
     @Override
