@@ -3,14 +3,19 @@ package com.example.DemoVirtualCloset.domain;
 import java.util.UUID;
 
 public class ClosingItem {
-    private final UUID uuid;
-    private final String name;
-    private final UUID categoryUuid;
-    private final String imageName;
+    private UUID uuid;
+    private String name;
+    private UUID categoryUuid;
+    private UUID userUuid;
+    private String imageName;
 
-    public ClosingItem(String name, UUID categoryUuid, String imageName) {
+    public ClosingItem() {
+    }
+
+    public ClosingItem(String name, UUID categoryUuid, UUID userUuid, String imageName) {
         this.name = name;
         this.categoryUuid = categoryUuid;
+        this.userUuid = userUuid;
         this.imageName = imageName;
         this.uuid = UUID.randomUUID();
     }
@@ -31,12 +36,17 @@ public class ClosingItem {
         return imageName;
     }
 
+    public UUID getUserUuid() {
+        return userUuid;
+    }
+
     @Override
     public String toString() {
         return "ClosingItem{" +
                 "uuid=" + uuid +
                 ", name='" + name + '\'' +
                 ", categoryUuid=" + categoryUuid +
+                ", userUuid=" + userUuid +
                 ", imageName='" + imageName + '\'' +
                 '}';
     }
