@@ -11,4 +11,6 @@ public interface OutfitService {
     OutfitDto save(SaveOutfitDto saveOutfitDto);
 
     List<OutfitDto> findAllByUserUuid(UUID userUuid);
+
+    OutfitDto generateOutfit(UUID userUuid);
 }

@@ -9,7 +9,10 @@ import com.example.DemoVirtualCloset.repositories.OutfitRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class OutfitServiceImpl implements OutfitService {
@@ -41,5 +44,27 @@ public class OutfitServiceImpl implements OutfitService {
                     return outfitMapper.toDto(outfit, closingItems);
                 })
                 .toList();
+    }
+
+    @Override
+    public OutfitDto generateOutfit(UUID userUuid) {
+        Map<UUID, List<ClosingItemDto>> closingItems = closingItemService.findAllByUserUuid(userUuid)
+                .stream()
+                .collect(Collectors.groupingBy(el -> el.getCategory().getUuid()));
+
+        List<ClosingItemDto> generatedClosingItems = closingItems.values().stream()
+                .map(this::getRandomClosingItem)
+                .toList();
+
+        return new OutfitDto(null, null, generatedClosingItems);
+    }
+
+    private ClosingItemDto getRandomClosingItem(List<ClosingItemDto> closingItems) {
+        Random random = new Random();
+        int i = random.ints(0, closingItems.size())
+                .findFirst()
+                .getAsInt();
+
+        return closingItems.get(i);
     }
 }
