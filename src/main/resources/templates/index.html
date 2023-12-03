@@ -4,43 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
 </head>
 <body>
-<div class="container">
-    <h1>Demo Virtual Closet</h1>
-    <hr />
-    <table class="table">
-        <thead class="table-dark">
-        <tr>
-            <th style="width: 50px"></th>
-            <th style="width: 40px">Id</th>
-            <th style="width: 100px">Category name</th>
-            <th style="width: 100px">Category item name</th>
-            <th style="width: 100px">Image item</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="category : ${categories}">
-            <td>
-                <div class="btn btn-group-sm" role="group">
-                    <a class="btn btn-info" th:href="@{/edit/{id}(id=${category.id})}">
-                        <i class="bi bi-pencil-fill"></i> Edit</a>
-                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${category.id})}">
-                        <i class="bi bi-trash-fill"></i> Delete</a>
-                </div>
-            </td>
-            <td th:text="${category.id}"></td>
-            <td th:text="${category.nameCategory}"></td>
-            <td th:text="${category.nameCategoryItem}"></td>
-            <td th:text="${category.itemImage}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <p><a class="btn btn-outline-success" href="/create-category">
-        <i class="bi bi-plus-square-fill"></i> Create new Category</a>
-    </p>
-</div>
-<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+    <div th:if="${user != null}">
+        <h3>Logged in as:
+            <span th:text="${user.username}" style="color: darkgray"/>
+        </h3>
+        <h4><a href="/logout">Logout</a></h4>
+        <h4><a href="/category-view">Move to Virtual Closet</a></h4>
+    </div>
 </body>
 </html>
