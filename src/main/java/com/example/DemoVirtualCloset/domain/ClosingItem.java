@@ -7,16 +7,16 @@ public class ClosingItem {
     private String name;
     private UUID categoryUuid;
     private UUID userUuid;
-    private String imageName;
+    private String image;
 
     public ClosingItem() {
     }
 
-    public ClosingItem(String name, UUID categoryUuid, UUID userUuid, String imageName) {
+    public ClosingItem(String name, UUID categoryUuid, UUID userUuid, String image) {
         this.name = name;
         this.categoryUuid = categoryUuid;
         this.userUuid = userUuid;
-        this.imageName = imageName;
+        this.image = image;
         this.uuid = UUID.randomUUID();
     }
 
@@ -32,8 +32,8 @@ public class ClosingItem {
         return categoryUuid;
     }
 
-    public String getImageName() {
-        return imageName;
+    public String getImage() {
+        return image;
     }
 
     public UUID getUserUuid() {
@@ -47,7 +47,6 @@ public class ClosingItem {
                 ", name='" + name + '\'' +
                 ", categoryUuid=" + categoryUuid +
                 ", userUuid=" + userUuid +
-                ", imageName='" + imageName + '\'' +
                 '}';
     }
 }

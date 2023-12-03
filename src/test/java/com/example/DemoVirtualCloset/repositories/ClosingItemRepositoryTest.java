@@ -67,7 +67,7 @@ public class ClosingItemRepositoryTest {
         assertEquals(closingItem.getName(), savedClosingItem.getName());
         assertEquals(closingItem.getCategoryUuid(), savedClosingItem.getCategoryUuid());
         assertEquals(closingItem.getUserUuid(), savedClosingItem.getUserUuid());
-        assertEquals(closingItem.getImageName(), savedClosingItem.getImageName());
+        assertEquals(closingItem.getImage(), savedClosingItem.getImage());
     }
 
     @Test
@@ -78,8 +78,8 @@ public class ClosingItemRepositoryTest {
 
     @Test
     void findAllByUserUuidTest() throws IOException {
-        ClosingItem closingItem1 = new ClosingItem("name", UUID.randomUUID(), UUID.randomUUID(), "image.jpg");
-        ClosingItem closingItem2 = new ClosingItem("name2", UUID.randomUUID(), closingItem1.getUserUuid(), "image2.jpg");
+        ClosingItem closingItem1 = new ClosingItem("name", UUID.randomUUID(), UUID.randomUUID(), "image");
+        ClosingItem closingItem2 = new ClosingItem("name2", UUID.randomUUID(), closingItem1.getUserUuid(), "image2");
 
         File closingItemFile = getClosingItemFile(closingItem1.getUserUuid());
         createFile(closingItemFile);

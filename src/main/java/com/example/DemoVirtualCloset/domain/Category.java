@@ -10,8 +10,12 @@ public class Category {
     }
 
     public Category(String name) {
+        this(UUID.randomUUID(), name);
+    }
+
+    public Category(UUID uuid, String name) {
+        this.uuid = uuid;
         this.name = name;
-        this.uuid = UUID.randomUUID();
     }
 
     public UUID getUuid() {

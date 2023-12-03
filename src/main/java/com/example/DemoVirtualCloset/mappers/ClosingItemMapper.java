@@ -14,6 +14,6 @@ public class ClosingItemMapper {
     }
 
     public ClosingItemDto toDto(ClosingItem closingItem, CategoryDto category) {
-        return new ClosingItemDto(closingItem.getUuid(), closingItem.getName(), category, closingItem.getImageName());
+        return new ClosingItemDto(closingItem.getUuid(), closingItem.getName(), category, closingItem.getImage());
     }
 }

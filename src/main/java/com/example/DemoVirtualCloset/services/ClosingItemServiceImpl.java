@@ -47,7 +47,7 @@ public class ClosingItemServiceImpl implements ClosingItemService {
         List<ClosingItem> closingItems = closingItemRepository.findAllByUserUuid(userUuid);
         Map<UUID, CategoryDto> categories = closingItems.stream()
                 .map(this::getClosingItemCategory)
-                .collect(Collectors.toMap(Category::getUuid, categoryMapper::toDto));
+                .collect(Collectors.toMap(Category::getUuid, categoryMapper::toDto, (el1, el2) -> el1));
         return closingItems.stream()
                 .map(el -> closingItemMapper.toDto(el, categories.get(el.getCategoryUuid())))
                 .toList();
