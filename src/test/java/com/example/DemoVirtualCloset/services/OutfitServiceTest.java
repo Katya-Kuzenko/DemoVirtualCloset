@@ -87,6 +87,24 @@ public class OutfitServiceTest {
         assertEqual(outfit2, outfitDto2, List.of(closingItem2));
     }
 
+    @Test
+    public void generateOutfitTest() {
+        UUID userUuid = UUID.randomUUID();
+
+        CategoryDto category1 = new CategoryDto(UUID.randomUUID(), "categoryName1");
+        CategoryDto category2 = new CategoryDto(UUID.randomUUID(), "categoryName2");
+
+        ClosingItemDto closingItem1 = new ClosingItemDto(UUID.randomUUID(), "name1", category1, "image");
+        ClosingItemDto closingItem2 = new ClosingItemDto(UUID.randomUUID(), "name2", category2, "image2");
+
+        when(closingItemService.findAllByUserUuid(userUuid)).thenReturn(List.of(closingItem1, closingItem2));
+
+        OutfitDto outfitDto = outfitService.generateOutfit(userUuid);
+
+        List<ClosingItemDto> generatedClosingItems = outfitDto.getClosingItems();
+        assertEquals(2, generatedClosingItems.size());
+    }
+
     private static void assertEqual(Outfit outfit, OutfitDto outfitDto, List<ClosingItemDto> closingItems) {
         assertEquals(outfit.getUuid(), outfitDto.getUuid());
         assertEquals(outfit.getName(), outfitDto.getName());
