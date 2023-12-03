@@ -5,7 +5,6 @@ spring:
   thymeleaf:
     cache: false
 
-<<<<<<< HEAD
 database:
   files:
     path:
@@ -14,10 +13,10 @@ database:
       categories: ${database.files.path.root}/categories
       closet: ${database.files.path.root}/closet
       outfit: ${database.files.path.root}/outfit
-=======
+
 #Replace Spring Security default username and password
   security:
     user:
       name: user1
       password: demo
->>>>>>> myfeature
+

@@ -7,12 +7,15 @@ import com.example.DemoVirtualCloset.repositories.CategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,6 +25,9 @@ public class CategoryServiceTest {
     private CategoryRepository categoryRepository;
 
     private CategoryServiceImpl categoryService;
+
+    @Captor
+    private ArgumentCaptor<Category> categoryCaptor;
 
     @BeforeEach
     public void init() {
@@ -40,5 +46,18 @@ public class CategoryServiceTest {
             assertEquals(category.getUuid(), categoryDto.getUuid());
             assertEquals(category.getName(), categoryDto.getName());
         }
+    }
+
+    @Test
+    public void saveTest() {
+        String categoryName = "name";
+        CategoryDto result = categoryService.save(categoryName);
+
+        verify(categoryRepository).save(categoryCaptor.capture());
+        Category category = categoryCaptor.getValue();
+        assertEquals(category.getName(), categoryName);
+
+        assertEquals(category.getUuid(), result.getUuid());
+        assertEquals(category.getName(), result.getName());
     }
 }
