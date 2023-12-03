@@ -10,33 +10,19 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-2">
-            <p><a class="btn btn-outline-success" href="/">
+            <p><a class="btn btn-outline-success" href="/category-view">
                 <i class="bi bi-arrow-left-square-fill"></i> Back</a>
             </p>
         </div>
         <div class="col-6">
             <h2>Add new Category</h2>
-            <form action="#" th:action="@{/category}" th:object="${category}" method="POST">
+            <form action="#" th:action="@{/create}" th:object="${categoryDto}" method="POST">
                 <div class="form-group">
                     <input class="form-control"
                            type="text"
-                           th:field="*{nameCategory}"
+                           th:field="*{name}"
                            id="nameCategory"
                            placeholder="Category name"
-                           style="background-color:#DCDCDC; height:40px; margin-top: 7px"
-                    />
-                    <input class="form-control"
-                           type="text"
-                           th:field="*{nameCategoryItem}"
-                           id="nameCategoryItemDto"
-                           placeholder="Category item name"
-                           style="background-color:#DCDCDC; height:40px; margin-top: 7px"
-                    />
-                    <input class="form-control"
-                           type="text"
-                           th:field="*{itemImage}"
-                           id="itemImageDto"
-                           placeholder="Item image"
                            style="background-color:#DCDCDC; height:40px; margin-top: 7px"
                     />
                     <button type="submit" class="btn btn-outline-success" style="margin: 7px">
