@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,22 @@ public class ClosingItemServiceImpl implements ClosingItemService {
                 .collect(Collectors.toMap(Category::getUuid, categoryMapper::toDto, (el1, el2) -> el1));
         return closingItems.stream()
                 .map(el -> closingItemMapper.toDto(el, categories.get(el.getCategoryUuid())))
+                .toList();
+    }
+
+    @Override
+    public Optional<ClosingItemDto> findById(UUID uuid) {
+        return closingItemRepository.findById(uuid)
+                .map(closingItem -> {
+                    Category category = getClosingItemCategory(closingItem);
+                    return closingItemMapper.toDto(closingItem, categoryMapper.toDto(category));
+                });
+    }
+
+    @Override
+    public List<ClosingItemDto> findAllByIds(List<UUID> ids) {
+        return ids.stream()
+                .map(uuid -> findById(uuid).orElseThrow(() -> new NotFoundException("Closing item not found by uuid " + uuid)))
                 .toList();
     }
 
