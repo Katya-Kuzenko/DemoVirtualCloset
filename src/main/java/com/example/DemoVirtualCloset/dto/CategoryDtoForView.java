@@ -3,7 +3,7 @@ package com.example.DemoVirtualCloset.dto;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class CategoryDto implements Serializable {
+public class CategoryDtoForView implements Serializable {
 
     public UUID uuid;
 
@@ -15,7 +15,7 @@ public class CategoryDto implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("CategoryDto{uuid=%b, nameCategory='%s', nameCategoryItem='%s', itemImage='%s'}", uuid, nameCategory, nameCategoryItem, itemImage);
+        return String.format("CategoryDtoForView{uuid=%b, nameCategory='%s', nameCategoryItem='%s', itemImage='%s'}", uuid, nameCategory, nameCategoryItem, itemImage);
     }
 
     public UUID getCategoryId() {

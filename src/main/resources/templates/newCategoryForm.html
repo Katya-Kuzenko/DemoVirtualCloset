@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-2">
+            <p><a class="btn btn-outline-success" href="/category-view">
+                <i class="bi bi-arrow-left-square-fill"></i> Back</a>
+            </p>
+        </div>
+        <div class="col-6">
+            <h2>Add new Category</h2>
+            <form action="#" th:action="@{/category}" th:object="${categoryDtoForView}" method="POST">
+                <div class="form-group">
+                    <input class="form-control"
+                           type="text"
+                           name="imageItem"
+                           th:field="*{nameCategory}"
+                           id="nameCategory"
+                           placeholder="Category name"
+                           style="background-color:#DCDCDC; height:40px; margin-top: 7px"
+                    />
+                    <input class="form-control"
+                           type="text"
+                           th:field="*{nameCategoryItem}"
+                           id="nameCategoryItemDto"
+                           placeholder="Category item name"
+                           style="background-color:#DCDCDC; height:40px; margin-top: 7px; margin-bottom: 15px"
+                    />
+                    <h5>Item image</h5>
+                    <input type="file"
+                           th:field="*{itemImage}"
+                           id="itemImage"
+                           style="width: 250px"
+                           accept="image/png, image/jpeg"
+                    />
+                    <p> </p>
+                    <img id="image" style="width: 200px"/>
+                    <p> </p>
+                    <button type="submit" class="btn btn-outline-success" style="margin: 7px">
+                        <i class="bi bi-plus-square-fill"></i> Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#itemImage').change(function () {
+            showImage(this);
+        });
+    });
+
+    function showImage(fileInput) {
+        file = fileInput.files[0];
+        reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#image').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+</script>
+</body>
+</html>
