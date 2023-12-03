@@ -11,10 +11,10 @@ public class SaveOutfitDto {
     public SaveOutfitDto() {
     }
 
-    public SaveOutfitDto(String name, UUID userUuid, List<UUID> closingItemIds) {
+    public SaveOutfitDto(String name, UUID userUuid, List<UUID> closingItemUuids) {
         this.name = name;
         this.userUuid = userUuid;
-        this.closingItemUuids = closingItemIds;
+        this.closingItemUuids = closingItemUuids;
     }
 
     public String getName() {
