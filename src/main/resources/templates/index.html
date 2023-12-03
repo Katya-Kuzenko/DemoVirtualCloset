@@ -21,8 +21,6 @@
         <tr th:each="categoryDto : ${categories}">
             <td>
                 <div class="btn btn-group-sm" role="group">
-                    <a class="btn btn-info" th:href="@{/edit/{id}(id=${categoryDto.id})}">
-                        <i class="bi bi-pencil-fill"></i> Edit</a>
                     <a class="btn btn-danger" th:href="@{/delete/{id}(id=${categoryDto.id})}">
                         <i class="bi bi-trash-fill"></i> Delete</a>
                 </div>
