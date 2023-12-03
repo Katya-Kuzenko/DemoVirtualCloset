@@ -16,20 +16,12 @@ repositories {
 }
 
 dependencies {
-<<<<<<< HEAD
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-=======
->>>>>>> myfeature
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-<<<<<<< HEAD
-//	runtimeOnly 'com.h2database:h2'
-=======
->>>>>>> myfeature
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'org.webjars:bootstrap:5.3.0'
