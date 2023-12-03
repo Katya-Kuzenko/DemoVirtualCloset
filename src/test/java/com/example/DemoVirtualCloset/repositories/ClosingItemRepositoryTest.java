@@ -20,9 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles("test")
 public class ClosingItemRepositoryTest {
@@ -88,6 +86,44 @@ public class ClosingItemRepositoryTest {
 
         List<ClosingItem> closingItems = closingItemRepository.findAllByUserUuid(closingItem1.getUserUuid());
         assertEquals(2, closingItems.size());
+    }
+
+    @Test
+    void findByIdNotExistTest() throws IOException {
+        ClosingItem closingItem1 = new ClosingItem("name", UUID.randomUUID(), UUID.randomUUID(), "image");
+        ClosingItem closingItem2 = new ClosingItem("name2", UUID.randomUUID(), closingItem1.getUserUuid(), "image2");
+
+        File closingItemFile = getClosingItemFile(closingItem1.getUserUuid());
+        createFile(closingItemFile);
+
+        objectMapper.writeValue(closingItemFile, List.of(closingItem1, closingItem2));
+
+        Optional<ClosingItem> closingItem = closingItemRepository.findById(UUID.randomUUID());
+        assertFalse(closingItem.isPresent());
+    }
+
+    @Test
+    void findByIdTest() throws IOException {
+        ClosingItem closingItem1 = new ClosingItem("name", UUID.randomUUID(), UUID.randomUUID(), "image");
+        ClosingItem closingItem2 = new ClosingItem("name2", UUID.randomUUID(), UUID.randomUUID(), "image2");
+
+        File closingItemFile1 = getClosingItemFile(closingItem1.getUserUuid());
+        createFile(closingItemFile1);
+
+        File closingItemFile2 = getClosingItemFile(closingItem1.getUserUuid());
+        createFile(closingItemFile2);
+
+        objectMapper.writeValue(closingItemFile1, List.of(closingItem1));
+        objectMapper.writeValue(closingItemFile2, List.of(closingItem2));
+
+        Optional<ClosingItem> closingItemOpt = closingItemRepository.findById(closingItem2.getUuid());
+        assertTrue(closingItemOpt.isPresent());
+        ClosingItem closingItem = closingItemOpt.get();
+        assertEquals(closingItem2.getUuid(), closingItem.getUuid());
+        assertEquals(closingItem2.getName(), closingItem.getName());
+        assertEquals(closingItem2.getCategoryUuid(), closingItem.getCategoryUuid());
+        assertEquals(closingItem2.getUserUuid(), closingItem.getUserUuid());
+        assertEquals(closingItem2.getImage(), closingItem.getImage());
     }
 
     private void createFile(File file) throws IOException {
