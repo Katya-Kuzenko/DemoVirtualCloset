@@ -1,8 +1,9 @@
 package com.example.DemoVirtualCloset.services;
 
-import org.springframework.stereotype.Service;
+import com.example.DemoVirtualCloset.dto.CategoryDto;
 
-@Service
-public class CategoryService {
+import java.util.List;
 
+public interface CategoryService {
+    List<CategoryDto> findAll();
 }
