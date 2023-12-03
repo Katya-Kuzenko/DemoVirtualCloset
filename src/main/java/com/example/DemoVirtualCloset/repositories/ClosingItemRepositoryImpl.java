@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -36,7 +37,16 @@ public class ClosingItemRepositoryImpl extends AbstractFileRepository<UUID, Clos
 
     @Override
     public Optional<ClosingItem> findById(UUID uuid) {
-        throw new RuntimeException("Method not supported");
+        File closetDirectory = new File(closetFilesPath);
+        File[] userFiles = closetDirectory.listFiles();
+        Optional<ClosingItem> closingItem = Optional.empty();
+        if (userFiles != null) {
+            closingItem = Arrays.stream(userFiles)
+                    .flatMap(file -> findAllByUserUuid(UUID.fromString(file.getName())).stream())
+                    .filter(el -> el.getUuid().equals(uuid))
+                    .findFirst();
+        }
+        return closingItem;
     }
 
     @Override
