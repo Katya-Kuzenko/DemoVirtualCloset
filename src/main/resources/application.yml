@@ -16,4 +16,15 @@ database:
       users: ${database.files.path.root}/users
       categories: ${database.files.path.root}/categories
       closet: ${database.files.path.root}/closet
+<<<<<<< HEAD
       outfit: ${database.files.path.root}/outfit
+=======
+      outfit: ${database.files.path.root}/outfit
+
+#Replace Spring Security default username and password
+  security:
+    user:
+      name: user1
+      password: demo
+
+>>>>>>> 7854196265b7b560a4e6a29d7ba0b7bd66a081da

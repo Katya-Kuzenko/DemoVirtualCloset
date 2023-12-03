@@ -27,4 +27,11 @@ public class CategoryServiceImpl implements CategoryService {
                 .map(categoryMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public CategoryDto save(String categoryName) {
+        Category category = new Category(categoryName);
+        categoryRepository.save(category);
+        return categoryMapper.toDto(category);
+    }
 }
