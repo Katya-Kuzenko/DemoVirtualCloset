@@ -2,20 +2,17 @@ package com.example.DemoVirtualCloset.domain;
 
 import java.util.UUID;
 
-public class Category {
+public class User {
     private UUID uuid;
     private String name;
+    private String password;
 
-    public Category() {
+    public User() {
     }
-
-    public Category(String name) {
-        this(UUID.randomUUID(), name);
-    }
-
-    public Category(UUID uuid, String name) {
-        this.uuid = uuid;
+    public User(String name, String password) {
         this.name = name;
+        this.password = password;
+        this.uuid = UUID.randomUUID();
     }
 
     public UUID getUuid() {
@@ -26,9 +23,13 @@ public class Category {
         return name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     @Override
     public String toString() {
-        return "Category{" +
+        return "User{" +
                 "uuid=" + uuid +
                 ", name='" + name + '\'' +
                 '}';

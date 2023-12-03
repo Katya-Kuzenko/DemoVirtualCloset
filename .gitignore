@@ -5,6 +5,11 @@ build/
 !**/src/test/**/build/
 
 ### IntelliJ IDEA ###
+.idea
+<<<<<<< HEAD
+.idea/workspace.xml
+=======
+>>>>>>> myfeature
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -15,6 +20,7 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+.idea/
 
 ### Eclipse ###
 .apt_generated

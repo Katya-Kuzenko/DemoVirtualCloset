@@ -1,19 +1,16 @@
-package com.example.DemoVirtualCloset.domain;
+package com.example.DemoVirtualCloset.dto;
 
 import java.util.UUID;
 
-public class Category {
+public class CategoryDto {
     private UUID uuid;
+
     private String name;
 
-    public Category() {
+    public CategoryDto() {
     }
 
-    public Category(String name) {
-        this(UUID.randomUUID(), name);
-    }
-
-    public Category(UUID uuid, String name) {
+    public CategoryDto(UUID uuid, String name) {
         this.uuid = uuid;
         this.name = name;
     }
@@ -28,7 +25,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category{" +
+        return "CategoryDto{" +
                 "uuid=" + uuid +
                 ", name='" + name + '\'' +
                 '}';

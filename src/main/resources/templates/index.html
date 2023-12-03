@@ -14,26 +14,20 @@
         <thead class="table-dark">
         <tr>
             <th style="width: 50px"></th>
-            <th style="width: 40px">Id</th>
             <th style="width: 100px">Category name</th>
-            <th style="width: 100px">Category item name</th>
-            <th style="width: 100px">Image item</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="category : ${categories}">
+        <tr th:each="categoryDto : ${categories}">
             <td>
                 <div class="btn btn-group-sm" role="group">
-                    <a class="btn btn-info" th:href="@{/edit/{id}(id=${category.id})}">
+                    <a class="btn btn-info" th:href="@{/edit/{id}(id=${categoryDto.id})}">
                         <i class="bi bi-pencil-fill"></i> Edit</a>
-                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${category.id})}">
+                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${categoryDto.id})}">
                         <i class="bi bi-trash-fill"></i> Delete</a>
                 </div>
             </td>
-            <td th:text="${category.id}"></td>
-            <td th:text="${category.nameCategory}"></td>
-            <td th:text="${category.nameCategoryItem}"></td>
-            <td th:text="${category.itemImage}"></td>
+
         </tr>
         </tbody>
     </table>
